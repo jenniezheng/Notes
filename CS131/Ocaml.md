@@ -1,15 +1,17 @@
-# OCaml
 
-###### Language Traits:
+## OCaml
+
+##### Language Traits:
 - functional language
-- compile-time type checking (like C, Java)
-- no need to manually specify types (like Python)
-- garbage collection
+- static typing (like C)
+- type inference (like Python)
+- no pointers nor objects
+- includes garbage collection
 - higher order functions
 
 ##### Currying
 A method of creating high order functions
-```
+```ocaml
 let badcon (x, y) = x :: y;;
 badcon (1,[2;3])
 
@@ -36,21 +38,20 @@ Function is for implicit matching
 
 ##### Defining Types
 Predefined type option
-```
+```ocaml
 type 'a option =
 | Some of 'a
 | None
 ```
 Creating discriminated union
-```
+```ocaml
 type custom_type =
 | Foo of int
 | Bar of int
 | Baz of string * int
 ```
 Creating value of type
-```
-Creating value
+```ocaml
 Bar 12;;
 Baz("abc", 19);;
 ```
