@@ -21,21 +21,17 @@ goodconpart2 [2;3]
 ```
 
 ##### Matching
-Uses patterns
+Uses pattern matching. Below are common matches...
 
-| Pattern | Matches |
+- 0 with Number zero
 
-| ------------- |:-------------:|
+- head::tail with Non-empty list 
 
-| 0 | The number zero |
+- [] with Empty List 
 
-| head::tail | Non-empty list |
+- var_x with Anything      
 
-| [] |Empty List |
-
-| var_x      | Anything      |
-
-| _ | Anything, trash variable |
+- _ with Anything, trash variable 
 
 ##### Fun vs Function
 fun is for currying
