@@ -22,12 +22,19 @@ goodconpart2 [2;3]
 
 ##### Matching
 Uses patterns
+
 | Pattern | Matches |
+
 | ------------- |:-------------:|
+
 | 0 | The number zero |
+
 | head::tail | Non-empty list |
+
 | [] |Empty List |
+
 | var_x      | Anything      |
+
 | _ | Anything, trash variable |
 
 ##### Fun vs Function
