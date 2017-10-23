@@ -52,3 +52,7 @@ tt:
 	make unmount
 	./lab3a img/EXTEdited.img >view
 	subl view
+push:
+	git add *
+	git commit -am "update"
+	git push origin master

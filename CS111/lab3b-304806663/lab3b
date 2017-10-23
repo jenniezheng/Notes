@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# I am not sure about the offsets I am guessing this is what the spec
+# I am not sure about the offsets are either
 import sys, string, locale, getopt,csv
 import os.path, math 
 from collections import defaultdict
@@ -21,7 +21,8 @@ def main():
     reserved_blocks.add("1")
     blocks_referenced[0]=1;
     blocks_referenced[1]=1;
-    blocks_referenced[2]=1;#adding 2 is a bit hard coded but I suppose it'll work for this lab
+    blocks_referenced[2]=1;#adding 1 and 2 is a bit hard coded but I suppose it'll work for this lab
+    #since it'll only include one group
 
 #modified===added variable contains_errors to apply exit codes 0 and 2
 
@@ -59,7 +60,7 @@ def main():
                 reserved_blocks_start=int(fields[6])
                 for x in range (reserved_blocks_start, inode_blocks_start+inode_blocks):
                     reserved_blocks.add(str(x))
-                    blocks_referenced[int(x)]=1
+                    blocks_referenced[int(x)]+=1
 
             if(fields[0]=="BFREE"):
                 b_no = int(fields[1])
@@ -257,40 +258,28 @@ def main():
                 else:
                     child_to_parent_dict[referenced_file_inode_num]=parent_inode_num;
         
-        directory_entry_check_status={}
-        for d in directory_inode_nums:
-            directory_entry_check_status[d]=3;
-        #check directories
         for fields in entries:
             if(fields[0]=="DIRENT"):
                 parent_inode_num=fields[1];
                 referenced_file_inode_num=fields[3];
                 direct_entry_name=fields[6];
-                if (parent_inode_num not in directory_entry_check_status):
+                if (parent_inode_num not in directory_inode_nums):
+                    #not directory
                     continue;
-                check_status=directory_entry_check_status[parent_inode_num];
-                if(direct_entry_name == "'.'"):
-                    if(not check_status&1):
-                        directory_entry_check_status[parent_inode_num]=-1;
-                    else:
-                        directory_entry_check_status[parent_inode_num]-=1;
+                
+                elif(direct_entry_name == "'.'"):
                     if(referenced_file_inode_num != parent_inode_num):
                         print "DIRECTORY INODE "+parent_inode_num+" NAME '.' LINK TO INODE "+referenced_file_inode_num+" SHOULD BE "+parent_inode_num
                         contains_errors=True
                     
                 elif(direct_entry_name=="'..'"):
-                    if(not check_status&2):
-                        directory_entry_check_status[parent_inode_num]=-1;
-                    else:
-                        directory_entry_check_status[parent_inode_num]-=2;
                     if(child_to_parent_dict[parent_inode_num] != referenced_file_inode_num):
                         print "DIRECTORY INODE "+parent_inode_num+" NAME '..' LINK TO INODE "+referenced_file_inode_num+" SHOULD BE "+child_to_parent_dict[parent_inode_num] 
                         contains_errors=True
-        #check that all hit
-        #not called for by specs so even though it's a useful check, imma comment it out
-        #for key in directory_entry_check_status:
-            #if(directory_entry_check_status[key]!=0):
-                #print "DIRECTORY INODE "+str(key)+" HAS EITHER TOO MANY OR TOO FEW '.' OR '..' ENTRIES"
+        
+        #not going to check that each directory has a . and .. bc specs didn't specify what error to print
+        #in those situations
+
         if(contains_errors):
             sys.exit(2);
         else:
