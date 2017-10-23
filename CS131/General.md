@@ -96,15 +96,3 @@ Dynamic linking - no need to recompile every time library is changed
 **Abstract vs. exposed types** - Abstract types have value and operations, while exposed types have value and representation in memory
 Name vs Structural type equivalence - Name means same name; structural means same internal structure
 
-**Subtypes** - when type A can always be substituted for type B, type A may be a subset of type B
-Polymorphism - when type depends on context. Example in operator overloading.
-```C
-typedef unsigned type1;
-typedef unsigned type2;
-
-type1 x;
-type2 *y;
-
-//structural equivalence
-y = &x;
-```
