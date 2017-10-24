@@ -1,17 +1,36 @@
 # Logical Systems
 
-### Based on MIT 6.004 Basics of Information Systems
+## General
+
+Based on [MIT 6.004](https://6004.mit.edu/) Basics of Information Systems
+
+Midterm - One page double sided notes
+
+Final - Two page double sided notes
+
+Roadmap: electrons -> devices -> logic gates -> circuits (EE) -> programmable architecture (CS) -> OS, internet of things
 
 ## Information
 
-Information is knowledge which resolves uncertainty
+**Information** is knowledge which resolves uncertainty. Quantify information by optimal bits to store it. Information on one coin flip = 1 bit, while information from 2 dice = 5.2 bits
 
 I(x<sub>i</sub>)=log<sub>2</sub>(1/p<sub>i</sub>)
 
-Example: Information on one coin flip = 1 bit, while information from 2 dice = 5.2 bits
 
-Information Entropy is expected information from each value.
+**Information Entropy** is expected information from each value.
 H(X)=E(I(x<sub>i</sub>))=summation of possibilities (probability * log<sub>2</sub>(1/p<sub>i</sub>) )
+
+**Signals** may be discrete/digital or continuous/analog, but are always represented with binary value.
+
+**Static Discipline** says a combinational device has one or more inputs and outputs, a timing specification, and an output specfication
+
+**Voltage Transfer Characteristic** is a V<sub>out</sub> vs V<sub>in</sub> curve.
+
+**Noise** unavoidable problem in circuits. Avoid problems with a safety buffer and V<sub>ol</sub><V<sub>il</sub><V<sub>ih</sub><V<sub>oh</sub>.
+
+**Labels** may be one-hot (array of N-1 zeros and 1 one) or single number in base 2
+
+**Encoding** is a method of effectively storing information with compression.
 
 What matters in Encoding:
 - Mechanism  with Devices and Components
@@ -19,22 +38,97 @@ What matters in Encoding:
 - Reliability with Immunity to Noise
 - Security with Encryption
 
-Encoding:
+Implementation of Encoding:
 - Huffman algorithm when not all bits are equally probable
-- Encode multiple bits at same time for increased compression
+- Other algorithms when encoding multiple bits at same time
 
-## Boolean Representation
+**Decoding** is a method if obtaining stored information. Example: 4->16 decoder converts 4 bits intp 16 bits.
+
+## CMOS Technology
+Structure
+- MOSFET has bulk, gate, source, and drain
+- NFET has + B, - S/D; B should be grounded (pulldown) to remain +.
+- PFET has - S/D, + B; B should be connected to VDD (pullup) to remain -.
+
+Complementary MOS
+- pullup on, pulldown on means unknown
+- pullup on, pulldown off means 1
+- pullup off, pulldown on means 0
+- pullup on, pulldown on means no connection
+- design for PFET, then swap parallel with series, series with parallel for NFET
+- rising input lead to falling output
+    - meaning when all input is 0, PFET on and NFET off so output is 1
+    - require inverting logic
+
+Delay
+- Propagation Delay - Upper bound on time for correct output after input changes
+- Contamination Delay - Lower bound on time for output to change after input changes, assumed 0
+- Lenient circuit (no glitches) will be valid when any combination of inputs necessary to determine behavior have been valid for P<sub>d</sub>
+
+
+## Function Specification
+Functions can be represented with
 - Truth Table
 - Min/max term notation
-- K-map
-- Boolean expressions and gates
+- Boolean expressions
+    - Operations
+    - Or with + | ^
+    - And with * V  \&
+    - Not with --. !
 
-## Physical Implementation
-- Noise margins
-- Static Discipline
-- CMOS transistors, gates, timing
+Functions can be simplified using
+- Axioms
+    - Communitivity
+    - Associativity
+    - Distributivity
+    - Idempotence
+    - Absorbtion
+    - Combination
 
-## Synthesis
-- Minimization
-- muxes
-- ROMS
+- K-map Representation
+    - Implicants are areas with all ones
+    - Prime implicants aren't completely contained by another implicant
+    - Size should be 1,2,4,8 etc wide and high
+    - 2 bits = circular array
+    - 4 bits = 2D circular array (useful up to this point)
+    - 6 bits = 3D circular array
+
+## Combinational Logic
+NAND and NOR
+- Faster
+- Universal
+
+AND and OR
+- Slower
+- More intuitive
+
+MUX
+- N select lines to one output
+- Input on bottom, output on left
+
+-|\\  \
+-|&nbsp; |- \
+-|/
+
+Decoder
+- k select lines to 2<sup>k</sup> output
+- Input on bottom, output on right
+- ROM
+    - Decoder with only non-variable outputs
+    - Structure of combination ignored, aka glitchy outputs
+
+&nbsp;&nbsp; /|- \
+-|&nbsp; |- \
+&nbsp;&nbsp; \\|-
+
+## Sequential Logic
+
+State
+- State can be remembered with capacitors
+- Voltage stored temperarily in capacitors, must be refreshed every so often because of leakage
+- Create feedback loops
+- Must be lenient for correct state to be stored
+
+Dynamic Discipline
+- T<sub>SETUP</sub>=2T<sub>PD</sub> means input<sub>1</sub> must be stable for setup time before transition of input<sub>2</sub>
+- T<sub>HOLD</sub>=T<sub>PD</sub> means input<sub>1</sub> must be stable for hold time after transition of input<sub>2</sub>
