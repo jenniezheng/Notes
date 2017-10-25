@@ -18,9 +18,23 @@
 - Everything is reference type, except for primitive types (note: arrays are objects rather than primitives)
 
 
+## Types
+**Types** - Set of values and operations on values. Why Types?
+- storage efficieny
+- allow predictable behavior
+- catch typos
+- overloading
+
+**Static vs Dynamic type checking** - Static type checking predicts types before program runs to ensure safety and speed, while dynamic type checking conclude types as program runs like in Python and Javascript
+
+**Duck Typing** - If woddle and quack like duck, it's a duck. Base object on behavior rather than type. Example: Python.
+
+**Abstract vs. exposed types** - Abstract types have value and operations, while exposed types have value and representation in memory
+Name vs Structural type equivalence - Name means same name; structural means same internal structure
 
 ## Subtypes
-**Definition** - Strictly add functionality but do not take any away.
+
+**Subtypes** - Strictly add functionality but do not take any away. Etc: subclass.
 
 **Syntax** - Subtypes declared with extends or implements
 
@@ -50,9 +64,8 @@ Collection <?> objects;
 ```
 **Implementation** - Bytecode interpreter only deals with specific types. Occasionally it'll erase an originally known type and cast at runtime.
 
-**Duck Typing** - If woddle and quack like duck, it's a duck. Base object on behavior rather than type. Example: Python.
 
-## Binding
+## Names
 
 When is variable bound?
 
@@ -61,20 +74,15 @@ When is variable bound?
 - Static is bound at link time
 - Local and need address is bound at function entry
 
-
-## Labeled Namespaces
-
-Aka structures in ML, namespace in C++, packages in Java and Ada, module in Python
-
-Where is a class visible?
+Where is an object's functions and variables visible?
 
 - public - everywhere
-
 - protected - from class, subclasses, and superclass
-
 - (none) - from class and subclasses
-
 - private - from class
+
+**Labaled Namespaces** - aka structures in ML, namespace in C++, packages in Java and Ada, module in Python
+
 
 
 ## Objects
@@ -111,7 +119,6 @@ public class Object {
 ```
 
 
-
 ## Concurrency
 Java allows threads.
 
@@ -122,6 +129,4 @@ Use `synchronized` key word
 Use `volatile` key word for variables which will be used by many threads and need to be stored in main memory and accessed with synchronization
 
 Use `AtomicIntegerArray` and other classes for atomic data storage
-
-
 
