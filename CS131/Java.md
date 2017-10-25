@@ -16,6 +16,7 @@
 - Many other languages like Scala and Clojure use JVM
 - Garbage collection, and no pointers,
 - Everything is reference type, except for primitive types (note: arrays are objects rather than primitives)
+- Objects are passed by address, while primitives are passed by value
 
 
 ## Types
@@ -46,6 +47,8 @@ Name vs Structural type equivalence - Name means same name; structural means sam
 **Multiple Inheritance** - In Java, object can implement many interfaces but only extend one class. But in other languages like C++, object can extend multiple classes.
 
 **Abstract Class** - An interface with a class. Cannot create an object of an abstract class.
+
+**Final Class** - A final class in Java cannot be subclassed. 
 
 **Bounded Wildcards** - Relaxes restrictions on variable and allows polymorphism.
 
@@ -87,14 +90,10 @@ Where is an object's functions and variables visible?
 
 ## Objects
 
-Objects are passed as pointers, while primitives are passed by value.
-
 **Object Class** - superclass to all classes in Java
 
 ```java
 public class Object {
-    /* imporant methods for Java */
-
     /* Constructer for testing code */
     public Object();
 
@@ -104,13 +103,14 @@ public class Object {
     /* Default for hashing an object's pointer */
     public int hashCode();
 
-    /* returns at compile time information at runtime */
+    /* returns at run time time information at compile time, 
+    final function cannot be overriden and can be inlined for efficiency*/
     public final Class getClass();
 
     /* returns a string represenation of an object */
     public String toString();
 
-    /* last will of an object */
+    /* garbage collects for an object, anything that may throw errow must throw throwable*/
     protected void finalize() throws Throwable;
 
     /* clone any object */
@@ -120,13 +120,17 @@ public class Object {
 
 
 ## Concurrency
-Java allows threads.
+**SMP** - Java takes advantage of shared memory parallelism and symmetric multiprocessing 
 
-Use `Thread` or `Runnable` class
+**Cores** - Most CPUs have 2-8 cores. At higher core numbers, it's difficult to share bus and RAM. 
 
-Use `synchronized` key word
+Use `Thread` or `Runnable` class. Threads may sleep, wait, or yield. 
+
+Use `synchronized` key word for functions on critical paths. 
 
 Use `volatile` key word for variables which will be used by many threads and need to be stored in main memory and accessed with synchronization
 
 Use `AtomicIntegerArray` and other classes for atomic data storage
+
+
 
