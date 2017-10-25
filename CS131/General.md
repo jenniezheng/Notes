@@ -80,19 +80,5 @@ CPU Profilers will track CPU time of lines
 
 Memory Profilers like Valgrind will find memory leaks and check memory usage
 
-## Types
-Definition - Set of values and operations on values
-
-Dynamic linking - no need to recompile every time library is changed
-
-##### Why?
-- storage efficieny
-- allow predictable behavior
-- catch typos
-- overloading
-
-**Static vs Dynamic type checking** - Static type checking predicts types before program runs to ensure safety and speed, while dynamic type checking conclude types as program runs like in Python and Javascript
-
-**Abstract vs. exposed types** - Abstract types have value and operations, while exposed types have value and representation in memory
-Name vs Structural type equivalence - Name means same name; structural means same internal structure
-
+##### Static vs Dynamic linking
+Dynamic linking means no need to recompile every time library is changed
