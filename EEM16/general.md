@@ -30,14 +30,12 @@ H(X)=E(I(x<sub>i</sub>))=summation of possibilities (probability * log<sub>2</su
 
 **Labels** may be one-hot (array of N-1 zeros and 1 one) or single number in base 2
 
-**Encoding** is a method of effectively storing information with compression.
-
-What matters in Encoding:
+**Encoding** is a method of effectively storing information with compression. What matters:
 - Mechanism  with Devices and Components
 - Efficiency with Bits Needed
 - Reliability with Immunity to Noise
 - Security with Encryption
-
+are
 Implementation of Encoding:
 - Huffman algorithm when not all bits are equally probable
 - Other algorithms when encoding multiple bits at same time
@@ -51,23 +49,28 @@ Structure
 - PFET has - S/D, + B; B should be connected to VDD (pullup) to remain -.
 
 Complementary MOS
-- pullup on, pulldown on means unknown
-- pullup on, pulldown off means 1
-- pullup off, pulldown on means 0
-- pullup on, pulldown on means no connection
-- design for PFET, then swap parallel with series, series with parallel for NFET
+- pullup, pulldown
+  - on, off means 1
+  - off, on means 0
+  - on, on means unknown
+  - off, off means no connection
 - rising input lead to falling output
-    - meaning when all input is 0, PFET on and NFET off so output is 1
+    - when all input is 0, PFET on and NFET off so output is 1
+    - when all input is 1, PFET off and NFET on so output is 0
     - require inverting logic
+    - design for PFET, then swap parallel with series, series with parallel for NFET
 
 Delay
-- Propagation Delay - Upper bound on time for correct output after input changes
-- Contamination Delay - Lower bound on time for output to change after input changes, assumed 0
+- Propagation Delay P<sub>d</sub> - Upper bound on time for correct output after input changes
+- Contamination Delay P<sub>c</sub> - Lower bound on time for output to change after input changes, assumed 0
 - Lenient circuit (no glitches) will be valid when any combination of inputs necessary to determine behavior have been valid for P<sub>d</sub>
 
 
 ## Function Specification
 Functions can be represented with
+- Number Systems
+	- Decimal, Binary, Octal, Hex
+	- 3 2 1 0 . -1 -2 -> resultant value is a<sup>n</sup>
 - Truth Table
 - Min/max term notation
 - Boolean expressions
@@ -78,31 +81,43 @@ Functions can be represented with
 
 Functions can be simplified using
 - Axioms
-    - Communitivity
-    - Associativity
+	- Identity ( 0 ^ x = 0, 1 V x = 1 )
+    - Communitivity 
+    - Associativity 
     - Distributivity
-    - Idempotence
-    - Absorbtion
-    - Combination
+    - Idempotence  ( 0 V x = x, 1 ^ x = x )
+    - Absorbtion ( x ^ ( x ^ y ) = x ) )
+    - Combination ( ( a ^ ( b ^ c )) V ( ~a ^ ( b ^ c ))=  b ^ c  )
+
+- Forms
+	- Minterm is a ^ b ^ c
+		- gives 1 one and lots of zeros (conjunctive form)
+		- product of sums, AND
+	- Maxterm is a V b V c
+		- gives lots of ones and 1 zero (disjunctive form)
+		- Sum of products, OR
 
 - K-map Representation
     - Implicants are areas with all ones
     - Prime implicants aren't completely contained by another implicant
-    - Size should be 1,2,4,8 etc wide and high
-    - 2 bits = circular array
-    - 4 bits = 2D circular array (useful up to this point)
-    - 6 bits = 3D circular array
+    - Size should be 2<sup>n</sup> wide and 2<sup>m</sup> high
+    - 1 or 2 bits = circular array
+    - 3 or 4 bits = 2D circular array (useful up to this point)
+    - 5 or 6 bits = 3D circular array
 
 ## Combinational Logic
-NAND and NOR
-- Faster
-- Universal
+Requirements
+- All building blocks combinational
+- No feedback loops
 
-AND and OR
-- Slower
-- More intuitive
+Basic Blocks
+  - NAND and NOR
+    - Faster
+    - buildable with single CMOS
+  - AND and OR
+  	- More intuitive
 
-MUX
+MUX or Multiplexers
 - N select lines to one output
 - Input on bottom, output on left
 
@@ -113,9 +128,8 @@ MUX
 Decoder
 - k select lines to 2<sup>k</sup> output
 - Input on bottom, output on right
-- ROM
-    - Decoder with only non-variable outputs
-    - Structure of combination ignored, aka glitchy outputs
+- Structure of combination ignored, aka glitchy outputs
+- ROM or Read-Only-Memory is decoder with only non-variable outputs
 
 &nbsp;&nbsp; /|- \
 -|&nbsp; |- \
