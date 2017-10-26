@@ -1,18 +1,24 @@
 # CS131
-### Four types of languages:
+
+## General
+Book
+- Class uses [Webber Online Ppts](http://www.webber-labs.com/mpl/)
+- Read Chapters 1-15, 17.
+
+Four types of languages:
 1. Imperative - This mainstream language type uses a series of statements to reach a goal
 2. Functional / declarative - Founded on mathematics, this language avoids mutations and allows easy parallelism
 3. Logic - This language builds upon predicates
 4. (Meta) - This language describes other languages
 
-### Class covers five specific languages
+Class covers five specific languages
 1. Ocaml - Functional
 2. Java - Imperative, Object Oriented
 3. Prolog - Logic
 4. Python - Mixed
 5. Scheme - Functional
 
-## General Topics
+Topics
 - syntax & semantics
 - functions
 - types
@@ -21,8 +27,13 @@
 - exceptions
 - concurrency
 
+Models of Computation
+- Finite State machine (FSM) - finite number of states
+- Push-down Automaton - FSM with stacks
+- Turing Machine - Very simple tape machine than can model any algorithm
+
 ## Syntax
-Form independent of meaning. Good syntax should be...
+Defined as formal grammar. Form independent of meaning. Good syntax should be...
 - similar to natural language
 - concise
 - writable
@@ -31,54 +42,66 @@ Form independent of meaning. Good syntax should be...
 - unambiguous
 - redundant
 
-## Grammar
-##### Parsing
-Context Free Grammar - All rules are one-to-one, one-to-many, or one-to-none. All rules may be applied no matter the context.
+Two seperate grammars
+- Phrase grammer is parse tree from tokens (Scanner)
+- Lexical grammar is sequence of tokens from text file (Parser)
 
-Parser - A program that reduces a token sequence to its syntactical parts, based on a grammar
+BNF Grammar
+- A Domain-Specific-Language (DSL) for parsing
+- Four parts (tokens, non-terminal symbols, start symbol, productions)
 
-Domain-Specific-Language (DSL) - Omits content not within the domain in order to simplify grammar
+Other Grammar Representations
+- Extended BNF (EBNF)
+- Syntax Diagram with Bypasses, Branching, and Loops
 
-BNF - A DSL for parsing
+Context
+- Context free grammar if all rules are one-to-one, one-to-many, or one-to-none. Aka all rules may be applied no matter the context.
+- Context sensitive if application of nonterminal depends on context
 
-Easy to check a derivation O(n^3) but hard to find one O(2^n)
+Common mistakes in Grammar
+- Used nonterminal without definition
+- Unused nonterminal with definition
+- Infinite loop
 
-##### Common mistakes in Grammar
-Used nonterminal without definition
-
-Unused nonterminal with definition
-
-Infinite loop
-
-##### Translation
+Translation
 - Tokenize Input
 - Type check program
 - Check identifiers
 - Create intermediate
 
-##### Models of Computation
-Finite State machine (FSM) - finite number of states
+## Parsing
+Parse Terminology
+- Parsing - trying to find parse tree for a string. Compilers parse strings using grammar for the specific language.
+- Parser - A program that reduces a token sequence to its syntactical
+parts, based on a grammar
+- Abstract parse tree - An abbreviated parse tree, often with node per operation.
 
-Push-down Automaton - FSM with stacks
+Problems
+- Ambiguity
+- Associativity (Left or Right?)
+- Trade-off between simplicity and readability
+- Easy to check a derivation O(n<sup>3</sup>) but hard to find one O(2<sup>n</sup>)
 
-Turing Machine - Very simple tape machine than can model any algorithm
+## The System
 
-##### Tools vs IDE
-IDE like Spyder or Eclipse highlights errors and helps with compilation
+The Classical Sequence
+- Create, compile (and optimize), assemble, link, load, run
 
-Tools like those in Unix are more lightweight and customizable
+Tools vs IDE
+- Integrated Development Environments (IDEs) like Spyder or Eclipse highlights errors, debugs, version controls, and compiles
+- Tools like those in Unix are more lightweight and customizable. Allows you to customize compilation and optimization, assembling, linking, loading, etc.
 
-##### Compilers vs Interpreters
-Compilers (ex: C compiler) allow for optimization of code and faster execution time
+Intermediate Languages
+- Pure Interpreters (ex: Python interpreter) create intermediate high level language. Points out errors and starts more quickly
+- Tokenizing interpreters create intermediate token stream.
+- Intermediate-code compiler creates intermediate virtual machine language. Better security, executable on different machines.
+- Native-code compiler creates physical machine langauge.
+- Just in time compiler (ex: Java compiler) will compile hotspots in code by keeping track of how often bytecodes are used
 
-Interpreters (ex: Python interpreter) point out errors and starts more quickly
+Profilers
+- CPU Profilers will track CPU time of lines
+- Memory Profilers like Valgrind will find memory leaks and check memory usage
 
-Just in time compiler (ex: Java compiler) will compile hotspots in code by keeping track of how often bytecodes are used
-
-##### Profilers
-CPU Profilers will track CPU time of lines
-
-Memory Profilers like Valgrind will find memory leaks and check memory usage
-
-##### Static vs Dynamic linking
-Dynamic linking means no need to recompile every time library is changed
+Static vs Dynamic linking
+- Dynamic linking means no need to recompile every time library is changed
+- Saves space and compile time
