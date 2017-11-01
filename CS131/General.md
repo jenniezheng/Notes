@@ -43,8 +43,8 @@ Defined as formal grammar. Form independent of meaning. Good syntax should be...
 - redundant
 
 Two seperate grammars
-- Phrase grammer is parse tree from tokens (Scanner)
-- Lexical grammar is sequence of tokens from text file (Parser)
+- Lexical grammar is sequence of tokens from text file (Scanner)
+- Phrase grammer is parse tree from tokens (Parser)
 
 BNF Grammar
 - A Domain-Specific-Language (DSL) for parsing
@@ -72,8 +72,7 @@ Translation
 ## Parsing
 Parse Terminology
 - Parsing - trying to find parse tree for a string. Compilers parse strings using grammar for the specific language.
-- Parser - A program that reduces a token sequence to its syntactical
-parts, based on a grammar
+- Parser - A program that reduces a token sequence to its syntactical parts, based on a grammar
 - Abstract parse tree - An abbreviated parse tree, often with node per operation.
 
 Problems
@@ -83,7 +82,6 @@ Problems
 - Easy to check a derivation O(n<sup>3</sup>) but hard to find one O(2<sup>n</sup>)
 
 ## The System
-
 The Classical Sequence
 - Create, compile (and optimize), assemble, link, load, run
 
