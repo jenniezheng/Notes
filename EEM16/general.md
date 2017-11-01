@@ -59,6 +59,7 @@ Complementary MOS
     - when all input is 1, PFET off and NFET on so output is 0
     - require inverting logic
     - design for PFET, then swap parallel with series, series with parallel for NFET
+    - use only PFET (with circle) for pullup, NFET for pulldown
 
 Delay
 - Propagation Delay P<sub>d</sub> - Upper bound on time for correct output after input changes
